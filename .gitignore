@@ -1,0 +1,29 @@
+# --- Virtual Environments ---
+**/myenv/
+**/venv/
+**/.venv/
+.env
+
+# --- Python & Notebooks ---
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Ignore all files in data folders
+data/raw/*
+data/processed/*
+data/temp/*
+
+# But keep the folders (use a placeholder file)
+!data/raw/.gitkeep
+!data/external/.gitkeep
+!data/processed/.gitkeep
+!data/temp/.gitkeep
+
+# --- OS & IDE ---
+.DS_Store
+.Thumbs.db
+.vscode/
+.idea/
