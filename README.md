@@ -27,25 +27,24 @@ Below is a detailed breakdown of the repository layout, detailing the role of ea
 │   │   ├── age_country_rankings.csv
 │   │   ├── gender_average_accuracy_by_round.csv
 │   │   ├── age_average_accuracy_by_round.csv
-│   │   ├── stability_generalization_country_rankings.csv (new)
 │   │   ├── gender_country_and_round_performance_indicators.csv
 │   │   ├── age_country_and_round_performance_indicators.csv
-│   │   ├── forward_stability_country_and_round_performance_indicators.csv (new)
-│   │   ├── backward_stability_country_and_round_performance_indicators.csv (new)
+│   │   ├── forward_stability_country_and_round_performance_indicators.csv 
+│   │   ├── backward_stability_country_and_round_performance_indicators.csv 
 │   │   ├── gender_feature_importance.csv
 │   │   ├── age_feature_importance.csv
-│   │   ├── forward_stability_feature_importance.csv (new)
-│   │   ├── backward_stability_feature_importance.csv (new)
+│   │   ├── forward_stability_feature_importance.csv 
+│   │   ├── backward_stability_feature_importance.csv 
 │   │   ├── gender_full_row_summary.csv
 │   │   ├── age_full_row_summary.csv
-│   │   ├── stability_full_row_summary.csv (new)
-│   │   ├── forwards_stability_train_row_summary.csv (new)
-│   │   ├── backwards_stability_train_row_summary.csv (new)
-│   │   ├── forwards_stability_test_row_summary.csv (new)
-│   │   ├── backwards_stability_test_row_summary.csv (new)
+│   │   ├── stability_full_row_summary.csv 
+│   │   ├── forwards_stability_train_row_summary.csv 
+│   │   ├── backwards_stability_train_row_summary.csv 
+│   │   ├── forwards_stability_test_row_summary.csv 
+│   │   ├── backwards_stability_test_row_summary.csv 
 │   │   ├── gender_processed_two_missingness_indicators.csv
 │   │   ├── age_processed_two_missingness_indicators.csv
-│   │   └── stability_processed_two_missingness_indicators.csv (new)
+│   │   └── stability_processed_two_missingness_indicators.csv 
 │   │   ├── gender_test_row_summary.csv
 │   │   ├── age_test_row_summary.csv
 │   │   └── gender_train_row_summary.csv
@@ -61,18 +60,18 @@ Below is a detailed breakdown of the repository layout, detailing the role of ea
 │   ├── gender_difference_analysis_20260830_1730.log
 │   ├── gender_difference_analysis_20260830_1745.log
 │   ├── age_difference_analysis_*.log
-│   ├── stability_generalization_*.log (new)
+│   ├── stability_generalization_*.log 
 │   └── Gender_specific_output.log
 ├── plots
 │   ├── countries_age_similarity_trends_nw_europe.html
 │   ├── countries_age_similarity_trends_other.html
 │   ├── age_feature_importance_top20.html
-│   ├── forward_stability_countries_gender_similarity_trends_nw_europe.html (new)
-│   ├── forward_stability_countries_gender_similarity_trends_other.html (new)
-│   ├── backward_stability_countries_gender_similarity_trends_nw_europe.html (new)
-│   ├── backward_stability_countries_gender_similarity_trends_other.html (new)
-│   ├── forward_stability_feature_importance_top20.html (new)
-│   ├── backward_stability_feature_importance_top20.html (new)
+│   ├── forward_stability_countries_gender_similarity_trends_nw_europe.html 
+│   ├── forward_stability_countries_gender_similarity_trends_other.html 
+│   ├── backward_stability_countries_gender_similarity_trends_nw_europe.html 
+│   ├── backward_stability_countries_gender_similarity_trends_other.html 
+│   ├── forward_stability_feature_importance_top20.html 
+│   ├── backward_stability_feature_importance_top20.html 
 │   ├── countries_gender_similarity_trends_nw_europe.html
 │   ├── countries_gender_similarity_trends_other.html
 │   ├── gender_feature_importance_top20.html
@@ -101,7 +100,7 @@ Below is a detailed breakdown of the repository layout, detailing the role of ea
 * **`age_difference_visualization.py`**: Dedicated visualization module. Reads age-group performance outputs from `data/processed/` and renders modular interactive Plotly charts, dividing countries into regionally grouped color-mapped line plots (North & Western Europe vs Southern/Central/Eastern Europe + Israel).
 * **`gender_difference_analysis.py`**: The core execution pipeline. Performs SPSS data parsing, C++ accelerated group validity filtering across Country × Round strata, missingness indicator flag engineering (`_is_na` and `_is_missing`), balanced sampling, feature selection via permutation importance, and model evaluation.
 * **`gender_difference_visualization.py`**: Dedicated visualization module. Reads Gender performance outputs from `data/processed/` and renders modular interactive Plotly charts, dividing countries into regionally grouped color-mapped line plots.
-* **`stability_generalization.py`**: Evaluates temporal cross-round stability and model generalization performance. Trains models on early rounds (1-2) to test predictability of later rounds, and trains on recent rounds (8-9) to backcast historical responses. This asymmetry analysis reveals whether gender response patterns are stable or converging over time.
+* **`stability_generalization.py`**: Evaluates temporal cross-round stability and model generalization performance. Trains models on early rounds (1-2) to test predictability of later rounds, and trains on recent rounds (8-9) to backcast historical responses. This asymmetry analysis reveals whether gender response patterns are stable or converging over time. **Note: Iceland is excluded from training calculations** due to its very small sample sizes in ESS surveys (typically < 100 respondents). Including Iceland would result in insufficient training samples (~10-15 rows per gender), which is inadequate for training complex models like `HistGradientBoostingClassifier`. Excluding Iceland allows larger countries (Germany, UK, France, etc.) to contribute their full sample sizes.
 * **`stability_generalization_visualization.py`**: Dedicated visualization module for stability generalization experiments. Generates interactive Plotly line plots for forward and backward predictability results, dividing countries into North & Western Europe vs Southern/Central/Eastern Europe + Israel with custom color palettes. Also produces feature importance visualizations for both experimental directions.
 * **`minus_one_gender_difference_analysis.py`** *(planned)*: Robustness validation script evaluating model performance and trends after dropping the single highest-importance feature to ensure results are not driven by a single dominant question.
 * **`minus_two_gender_difference_analysis.py`** *(planned)*: Robustness validation script excluding the top two highest-importance features.
@@ -131,9 +130,11 @@ Below is a detailed breakdown of the repository layout, detailing the role of ea
 * **`gender_average_accuracy_by_round.csv`**: Aggregated mean accuracy scores across all participating countries for each ESS Round. This time-series format summarizes how well gender can be predicted across different survey waves, revealing temporal trends in demographic similarity of responses and potential convergence or divergence of gendered behavioral patterns over time.
 * **`country_rankings.csv`**: Summary ranking table with each country's overall mean prediction accuracy (averaged across all rounds), total number of ESS Rounds in which the country participated, and relative rank position for gender analysis. This file serves as input to generate custom color mappings for regional visualization plots, facilitating comparative cross-country analyses.
 * **`gender_feature_importance.csv`**: Feature importance scores computed via permutation importance evaluation. Lists all retained features sorted by descending mean importance score, with categorical labels identifying each feature as a *Base Survey Question*, *Not Applicable Flag* (``_is_na``), or *Other Missing Flag* (``_is_missing``). This reveals which survey questions and missingness patterns most strongly predict gender identity.
-* **`stability_generalization_country_rankings.csv`**: Summary ranking table with each country's overall mean prediction accuracy (averaged across all rounds) for stability generalization analysis, total number of ESS Rounds in which the country participated, and relative rank position. This enables comparative cross-country analyses of temporal stability patterns.
-* **`forward_stability_country_and_round_performance_indicators.csv`**: Model evaluation metrics from the Forward Predictability experiment (training on Rounds 1-2, testing across all rounds) containing sample size (`test_n`), accuracy score, and F1 score for each Country × ESS Round stratum. This reveals temporal stability of gender predictability across survey waves.
-* **`backward_stability_country_and_round_performance_indicators.csv`**: Model evaluation metrics from the Backward Predictability experiment (training on Rounds 8-9, testing across all rounds) containing sample size (`test_n`), accuracy score, and F1 score for each Country × ESS Round stratum. This enables comparison of historical vs modern prediction performance.
+
+
+#### Gender Stability Analysis Files
+* **`forward_stability_country_and_round_performance_indicators.csv`**: Model evaluation metrics from the Forward Predictability experiment (training on Rounds 1-2, testing across all rounds) containing sample size (`test_n`), accuracy score, and F1 score for each Country × ESS Round stratum. This reveals temporal stability of gender predictability across survey waves. **Note: Iceland is excluded from training calculations** due to its very small sample sizes in ESS surveys (typically < 100 respondents). Including Iceland would result in insufficient training samples (~10-15 rows per gender), which is inadequate for training complex models like `HistGradientBoostingClassifier`. Excluding Iceland allows larger countries (Germany, UK, France, etc.) to contribute their full sample sizes.
+* **`backward_stability_country_and_round_performance_indicators.csv`**: Model evaluation metrics from the Backward Predictability experiment (training on Rounds 8-9, testing across all rounds) containing sample size (`test_n`), accuracy score, and F1 score for each Country × ESS Round stratum. This enables comparison of historical vs modern prediction performance.**Note: Iceland is excluded from training calculations** due to its very small sample sizes in ESS surveys (typically < 100 respondents). Including Iceland would result in insufficient training samples (~10-15 rows per gender), which is inadequate for training complex models like `HistGradientBoostingClassifier`. Excluding Iceland allows larger countries (Germany, UK, France, etc.) to contribute their full sample sizes.
 * **`forward_stability_feature_importance.csv`**: Feature importance scores from the Forward Predictability experiment, computed via permutation importance evaluation. Lists all retained features sorted by descending mean importance score with categorical labels identifying each feature type. This reveals which survey questions most strongly predict gender identity in historical contexts.
 * **`backward_stability_feature_importance.csv`**: Feature importance scores from the Backward Predictability experiment, computed via permutation importance evaluation. Lists all retained features sorted by descending mean importance score with categorical labels identifying each feature type. This reveals which survey questions most strongly predict gender identity in modern contexts.
 * **`stability_full_row_summary.csv`**: Comprehensive row-level summary of processed data for both forward and backward experiments containing country, round, total rows, and missingness statistics for all survey features used in stability generalization analysis.
@@ -141,7 +142,7 @@ Below is a detailed breakdown of the repository layout, detailing the role of ea
 * **`forwards_stability_test_row_summary.csv`**: Summary table for the testing split (all rounds 1-9) in the Forward Predictability experiment. Contains Country, ESS_round, total_number_rows, pct_cells_Non_applicable, and pct_cells_Missing statistics for each country-round stratum.
 * **`backwards_stability_train_row_summary.csv`**: Summary table for the training split (Rounds 8-9) in the Backward Predictability experiment. Contains Country, ESS_round, total_number_rows, pct_cells_Non_applicable, and pct_cells_Missing statistics for each country-round stratum.
 * **`backwards_stability_test_row_summary.csv`**: Summary table for the testing split (all rounds 1-9) in the Backward Predictability experiment. Contains Country, ESS_round, total_number_rows, pct_cells_Non_applicable, and pct_cells_Missing statistics for each country-round stratum.
-* **`stability_processed_two_missingness_indicators.csv`**: The fully preprocessed dataset containing all survey response features with zero-filled values, dual missingness indicator flags (``_is_na`` and ``_is_missing``), and gender target encoding for stability generalization analysis.
+* **`stability_processed_two_missingness_indicators.csv`**: The fully preprocessed dataset containing all survey response features with zero-filled values, dual missingness indicator flags (``_is_na`` and ``_is_missing``), and gender target encoding for stability generalization analysis.**Note: Iceland is excluded from training calculations** due to its very small sample sizes in ESS surveys (typically < 100 respondents). Including Iceland would result in insufficient training samples (~10-15 rows per gender), which is inadequate for training complex models like `HistGradientBoostingClassifier`. Excluding Iceland allows larger countries (Germany, UK, France, etc.) to contribute their full sample sizes.
 
 ---
 
@@ -168,3 +169,9 @@ Below is a detailed breakdown of the repository layout, detailing the role of ea
 2. **Dual Missingness Flag Encoding**: Distinguishes structural survey skips (`_is_na`) from non-responses (`_is_missing`) prior to zero-imputation.
 3. **Stratified Group Sampling**: Samples balanced observations per Country × Round stratum to eliminate sampling quantity bias across strata.
 4. **Gradient Boosting & Permutation Selection**: Uses `HistGradientBoostingClassifier` combined with permutation importance to eliminate non-informative features.
+
+---
+
+### Special Considerations for Stability Generalization Analysis
+
+**Iceland Exclusion**: For stability generalization experiments, Iceland is excluded from training calculations due to its very small sample sizes in ESS surveys (typically < 100 respondents). When calculating `train_n` based on the smallest country/round group, including Iceland would result in only ~10-15 training rows per gender, which is insufficient for training complex models. This exclusion allows larger countries (Germany, UK, France, etc.) to contribute their full sample sizes while still including Iceland in test performance evaluations.
