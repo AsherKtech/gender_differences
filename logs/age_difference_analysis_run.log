@@ -1,0 +1,105 @@
+Step 1: Loading raw SPSS file and metadata...
+Number of unique countries: 38
+Step 1: Setting test age brackets [18-34] vs [37-51]...
+
+====================================================================================
+Age Distribution Before Preprocessing Steps (Steps 2–5)
+====================================================================================
+
+Sample distribution for [37-51] before preprocessing:
+Older (37-51): 108929 rows
+Young (18-34): 103537 rows
+
+✅ Age distribution check completed.
+Step 2: Identifying columns present across all Country/Round pairs...
+2340 numeric candidate cols, 23 string candidate cols
+1.3179991245269775
+Validation completed in 1.98 seconds
+Step 3: Renaming headers and dropping excluded metadata, structural proxies, and age leakage...
+Dropped 17 leakage/proxy/metadata columns: ['Population_size_weight_(must_be_combined_with_dweight_or_pspwght)', 'Age_of_respondent,_calculated', 'Year_of_birth_of_sixth_person_in_household', 'Year_of_birth_of_fourth_person_in_household', 'Design_weight', 'Partner_doing_last_7_days:_housework,_looking_after_children,_others', 'Doing_last_7_days:_housework,_looking_after_children,_others', "Respondent's_identification_number", 'Partner_doing_last_7_days:_retired', 'Post-stratification_weight_including_design_weight', 'Year_of_birth_of_second_person_in_household', 'Year_of_birth', 'Year_of_birth_of_third_person_in_household', 'Year_of_birth_of_fifth_person_in_household', 'Year_last_in_paid_job', 'Doing_last_7_days:_retired', 'Ever_had_children_living_in_household']
+Step 4: Constructing _is_na and _is_missing indicator flags...
+Total 'Not Applicable' (NA) values across all features: 2018882
+Total other missing values: 1788932
+Step 5: Generating missingness summary table per country and round...
+✅ Missingness summary table generated successfully!
+   Country  ESS_round  ...  pct_cells_Non_applicable  pct_cells_Missing
+0  Albania        6.0  ...                  6.822698           6.061677
+1  Austria        1.0  ...                  9.233431           8.335966
+2  Austria        2.0  ...                  9.130840           8.132187
+3  Austria        3.0  ...                  9.244205           8.624560
+4  Austria        7.0  ...                  9.758716           7.460672
+5  Austria        8.0  ...                 10.303391           8.078852
+6  Austria        9.0  ...                  9.847260           9.113935
+7  Belgium        1.0  ...                  9.575690           8.938299
+8  Belgium        2.0  ...                  9.581409           8.641939
+9  Belgium        3.0  ...                  9.400631           9.195333
+
+[10 rows x 5 columns]
+
+====================================================================================
+Age Distribution After Preprocessing Steps (Steps 2–5)
+====================================================================================
+Older (37-51) (encoded 0): 108929 rows
+Young (18-34) (encoded 1): 103537 rows
+
+✅ Age distribution check completed.
+✅ Missingness summary table saved to '/data/home/asher.katz/Projects/gender_differences/data/processed/Age_full_row_summary.csv'
+   Summary shape: 228 rows (country-round pairs), 5 columns
+✅ Processed dataset saved with shape (212466, 319) to '/data/home/asher.katz/Projects/gender_differences/data/processed/Age_processed_two_missingness_indicators.csv'
+Step 6: Performing balanced stratified train/test split...
+Step 7: Creating train and test summary tables...
+✅ Train summary table saved to '/data/home/asher.katz/Projects/gender_differences/data/processed/Age_train_row_summary.csv'
+   Shape: 228 rows (country-round pairs), 5 columns
+✅ Test summary table saved to '/data/home/asher.katz/Projects/gender_differences/data/processed/Age_test_row_summary.csv'
+   Shape: 228 rows (country-round pairs), 5 columns
+
+Train Summary Preview:
+   Country  ESS_round  ...  pct_cells_Non_applicable  pct_cells_Missing
+0  Albania        6.0  ...                  6.977401           6.158192
+1  Austria        1.0  ...                  9.309927           8.329298
+2  Austria        2.0  ...                  9.063761           8.563358
+3  Austria        3.0  ...                  9.039548           9.180791
+4  Austria        7.0  ...                  9.874899           7.530266
+
+[5 rows x 5 columns]
+
+Test Summary Preview:
+   Country  ESS_round  ...  pct_cells_Non_applicable  pct_cells_Missing
+0  Albania        6.0  ...                  6.733866           6.006257
+1  Austria        1.0  ...                  9.215904           8.337494
+2  Austria        2.0  ...                  9.144690           8.043161
+3  Austria        3.0  ...                  9.284522           8.514985
+4  Austria        7.0  ...                  9.717172           7.435786
+
+[5 rows x 5 columns]
+Step 8: Fitting Baseline HistGradientBoostingClassifier & Selecting Features...
+
+Step 9: Computing final feature importances and generating plot...
+✅ Full feature importances exported to '/data/home/asher.katz/Projects/gender_differences/data/processed/Age_feature_importance.csv' and Top 20 plot saved to '/data/home/asher.katz/Projects/gender_differences/plots/Age_feature_importance_top20.html'.
+
+==================================================
+   AVERAGE Age ACCURACY ACROSS ALL COUNTRIES BY ROUND 
+==================================================
+Round 1: 0.7576
+Round 2: 0.7562
+Round 3: 0.7577
+Round 4: 0.7564
+Round 5: 0.7733
+Round 6: 0.7705
+Round 7: 0.7701
+Round 8: 0.7576
+Round 9: 0.7647
+✅ Country summary saved to '/data/home/asher.katz/Projects/gender_differences/data/processed/country_rankings.csv'
+
+Country Summary Preview:
+   Name_of_country  average_accuracy  num_rounds
+31        Slovenia          0.810186           9
+11         Germany          0.794456           9
+32           Spain          0.786103           9
+25          Poland          0.784272           9
+9          Finland          0.772352           9
+33          Sweden          0.770639           9
+24          Norway          0.770176           9
+2          Belgium          0.770054           9
+13         Hungary          0.762535           9
+10          France          0.758556           9

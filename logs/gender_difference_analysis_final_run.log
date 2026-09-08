@@ -1,0 +1,98 @@
+Step 1: Loading raw SPSS file and metadata...
+Number of unique countries: 38
+Gender distribution before filtering:
+Male (code 1): 198789 rows
+Female (code 2): 231749 rows
+Step 2: Identifying columns present across all Country/Round pairs...
+2340 numeric candidate cols, 23 string candidate cols
+Validation completed in 4.10 seconds
+Step 3: Renaming headers and dropping excluded metadata...
+Note: 14 cols_to_drop entries not found in df_subset (already excluded by retained_cols filter): ['cntry', 'essround', 'gndr', 'Title_of_dataset', 'Edition', 'Production_date', 'Country_of_birth', 'Country_of_birth,_father', 'Language_most_often_spoken_at_home:_first_mentioned', 'Country_of_birth,_mother', 'nan_count', 'Citizenship', 'Language_most_often_spoken_at_home:_second_mentioned', 'Region']
+Step 4: Constructing _is_na and _is_missing indicator flags...
+Total 'Not Applicable' (NA) values across all features: 5094341
+Total other missing values (refused/don't know/etc.) + NaNs: 3689290
+Step 5: Generating missingness summary table per country and round...
+✅ Missingness summary table generated successfully!
+   Country  ESS_round  ...  pct_cells_Non_applicable  pct_cells_Missing
+0  Albania        6.0  ...                  9.133298           6.263720
+1  Austria        1.0  ...                 10.930036           8.106497
+2  Austria        2.0  ...                 10.736622           7.836074
+3  Austria        3.0  ...                 10.874693           8.313362
+4  Austria        7.0  ...                 11.099519           7.081286
+5  Austria        8.0  ...                 11.436454           7.578019
+6  Austria        9.0  ...                 11.068064           8.680927
+7  Belgium        1.0  ...                 11.018474           8.951386
+8  Belgium        2.0  ...                 11.178546           8.186420
+9  Belgium        3.0  ...                 11.261503           8.554454
+
+[10 rows x 5 columns]
+
+====================================================================================
+Gender Distribution After Preprocessing Steps (Steps 2–5)
+====================================================================================
+1.0 (encoded 0): 198789 rows
+2.0 (encoded 1): 231749 rows
+
+✅ Gender distribution check completed.
+✅ Missingness summary table saved to '/data/home/asher.katz/Projects/gender_differences/data/processed/gender_full_row_summary.csv'
+   Summary shape: 228 rows (country-round pairs), 5 columns
+✅ Processed dataset saved with shape (430538, 334) to '/data/home/asher.katz/Projects/gender_differences/data/processed/gender_processed_two_missingness_indicators.csv'
+Step 6: Performing balanced stratified train/test split...
+Step 7: Creating train and test summary tables...
+✅ Train summary table saved to '/data/home/asher.katz/Projects/gender_differences/data/processed/gender_train_row_summary.csv'
+   Shape: 228 rows (country-round pairs), 5 columns
+✅ Test summary table saved to '/data/home/asher.katz/Projects/gender_differences/data/processed/gender_test_row_summary.csv'
+   Shape: 228 rows (country-round pairs), 5 columns
+
+Train Summary Preview:
+   Country  ESS_round  ...  pct_cells_Non_applicable  pct_cells_Missing
+0  Albania        6.0  ...                  9.112839           6.259968
+1  Austria        1.0  ...                 10.861244           7.878788
+2  Austria        2.0  ...                 10.807416           7.826954
+3  Austria        3.0  ...                 10.944976           8.403110
+4  Austria        7.0  ...                 11.084530           7.242823
+
+[5 rows x 5 columns]
+
+Test Summary Preview:
+   Country  ESS_round  ...  pct_cells_Non_applicable  pct_cells_Missing
+0  Albania        6.0  ...                  9.145821           6.266016
+1  Austria        1.0  ...                 10.947453           8.164151
+2  Austria        2.0  ...                 10.718687           7.838384
+3  Austria        3.0  ...                 10.858249           8.292364
+4  Austria        7.0  ...                 11.104624           7.026275
+
+[5 rows x 5 columns]
+Step 8: Fitting HistGradientBoostingClassifier...
+
+Step 9: Running exports and building plots...
+
+Evaluating and exporting feature importance...
+✅ Full feature importances exported to '/data/home/asher.katz/Projects/gender_differences/data/processed/gender_feature_importance.csv' and Top 20 plot saved to '/data/home/asher.katz/Projects/gender_differences/plots/gender_feature_importance_top20.html'.
+
+==================================================
+   AVERAGE GENDER ACCURACY ACROSS ALL COUNTRIES BY ROUND 
+==================================================
+Round 1: 0.7847
+Round 2: 0.7774
+Round 3: 0.7776
+Round 4: 0.7652
+Round 5: 0.7621
+Round 6: 0.7604
+Round 7: 0.7528
+Round 8: 0.7461
+Round 9: 0.7362
+✅ Country summary saved to '/data/home/asher.katz/Projects/gender_differences/data/processed/country_rankings.csv'
+
+Country Summary Preview:
+   Name_of_country  average_accuracy  num_rounds
+23     Netherlands          0.795371           9
+32           Spain          0.790778           9
+34     Switzerland          0.787760           9
+11         Germany          0.784323           9
+15         Ireland          0.777064           9
+24          Norway          0.773308           9
+2          Belgium          0.768452           9
+31        Slovenia          0.765818           9
+37  United Kingdom          0.765263           9
+9          Finland          0.762557           9

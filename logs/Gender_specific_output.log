@@ -1,0 +1,35 @@
+Step 1: Loading raw SPSS file, setting age thresholds, and building discrete groups...
+Targeting ~50% random chance: Matched Young [18-34] (N=103537) against Older [50-63]
+Number of responses in Young age group [18-34]: 103537
+Number of responses in Older age group [50-63]: 100427
+Total number of valid age entries (18+): 430870
+Filtered dataset size: 203964 rows across 38 countries.
+Step 2: Identifying columns present across all Country/Round pairs...
+2340 numeric candidate cols, 23 string candidate cols
+1.1575322151184082
+Validation completed in 1.81 seconds
+Step 3: Renaming headers and dropping excluded metadata, structural proxies, and age leakage...
+Dropped 17 leakage/proxy/metadata columns: ['Year_of_birth_of_fourth_person_in_household', 'Post-stratification_weight_including_design_weight', "Respondent's_identification_number", 'Year_of_birth_of_sixth_person_in_household', 'Year_last_in_paid_job', 'Population_size_weight_(must_be_combined_with_dweight_or_pspwght)', 'Year_of_birth_of_fifth_person_in_household', 'Partner_doing_last_7_days:_retired', 'Partner_doing_last_7_days:_housework,_looking_after_children,_others', 'Doing_last_7_days:_housework,_looking_after_children,_others', 'Age_of_respondent,_calculated', 'Year_of_birth_of_second_person_in_household', 'Design_weight', 'Doing_last_7_days:_retired', 'Year_of_birth', 'Year_of_birth_of_third_person_in_household', 'Ever_had_children_living_in_household']
+Step 4: Constructing _is_na and _is_missing indicator flags...
+Total 'Not Applicable' (NA) values across all features: 2138522
+Total other missing values: 1708125
+✅ Processed dataset saved with shape (203964, 322) to 'ess_processed_age_experiment.csv'
+
+Verifying age group composition in df_processed...
+Unique AgeGroup values found: ['Older (50-63)', 'Young (18-34)']
+✅ Age group composition verified: only 'Young (18-34)' and 'Older (50-63)' present.
+   - No respondents aged 40 or 70 (or any other ages outside [18,34] ∪ [50,63]).
+Step 5: Performing balanced stratified train/test split...
+Step 6: Fitting HistGradientBoostingClassifier for Age Prediction...
+Selected 137 informative features, dropped 181 uninformative ones.
+
+Step 7: Running exports and building plots...
+
+Evaluating and exporting feature importance...
+✅ Feature importances exported to 'age_features_importances_sorted.csv' and plot saved to 'age_total_feature_importance.html'.
+
+Generating unified all-countries plot for Age (filtering for countries with ≥ 6 rounds)
+✅ Unified plot saved to 'age_similarity_trends_unified.html' (21 countries included).
+
+Generating interactive group-filtered trend plot for Age (min 1 rounds)...
+✅ Group-filtered trend plot saved to 'age_similarity_trends_indicators_grouped.html'.
